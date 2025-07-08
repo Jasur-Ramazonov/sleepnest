@@ -5,9 +5,10 @@ import { Language } from "./utils/defination";
 import { useEffect, useState } from "react";
 import i18n from "./i18n";
 import Button from "./Button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./utils/store";
 import { useTranslation } from "react-i18next";
+import { setIsOpen } from "./utils/slice";
 
 const Header = () => {
   const location = useLocation();
@@ -16,6 +17,7 @@ const Header = () => {
   const isOpen = useSelector((state: RootState) => state.myReducer.isOpen);
   const { t } = useTranslation();
   const wishlist = useSelector((state: RootState) => state.myReducer.wishlist);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     i18n.changeLanguage(currentLanguage);
@@ -129,7 +131,7 @@ const Header = () => {
         className={clsx(
           "fixed top-0 z-[99] w-full h-full bg-white duration-300 ease-linear md:-right-[100%] flex justify-center",
           { "right-0": isOpen },
-          { "-right-[100%]": !isOpen }
+          { "-right-full": !isOpen }
         )}
       >
         <ul className="flex flex-col gap-10 items-center mt-20">
@@ -140,7 +142,13 @@ const Header = () => {
               { "font-light": location.pathname !== "/" }
             )}
           >
-            <Link to="/">{t("Home")}</Link>
+            <button
+              onClick={() => {
+                dispatch(setIsOpen(false));
+              }}
+            >
+              <Link to="/">{t("Home")}</Link>
+            </button>
           </li>
           <li
             className={clsx(
@@ -153,7 +161,13 @@ const Header = () => {
               }
             )}
           >
-            <Link to="/collection">{t("Collection")}</Link>
+            <button
+              onClick={() => {
+                dispatch(setIsOpen(false));
+              }}
+            >
+              <Link to="/collection">{t("Collection")}</Link>
+            </button>
           </li>
           <li
             className={clsx(
@@ -166,7 +180,13 @@ const Header = () => {
               }
             )}
           >
-            <Link to="/about">{t("About Us")}</Link>
+            <button
+              onClick={() => {
+                dispatch(setIsOpen(false));
+              }}
+            >
+              <Link to="/about">{t("About Us")}</Link>
+            </button>
           </li>
           <li
             className={clsx(
@@ -179,7 +199,13 @@ const Header = () => {
               }
             )}
           >
-            <Link to="/contacts">{t("Contacts")}</Link>
+            <button
+              onClick={() => {
+                dispatch(setIsOpen(false));
+              }}
+            >
+              <Link to="/contacts">{t("Contacts")}</Link>
+            </button>
           </li>
           <li className="relative">
             <Link to="/wishlist">

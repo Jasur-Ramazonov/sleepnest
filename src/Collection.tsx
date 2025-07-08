@@ -11,34 +11,34 @@ import TelegramButton from "./TelegramButton";
 
 const Collection = () => {
   const { t } = useTranslation();
-
-  const [currentCollection, setCurrentCollection] = useState(
-    t("All collections")
-  );
+  const wishlist = localStorage.getItem("wishes")!;
+  const wishlistArr: string[] = JSON.parse(wishlist);
+  const [currentCollection, setCurrentCollection] = useState("All collections");
   const [currentCollectionArr, setCurrentCollectionArr] = useState<
     { src: string; name: string }[]
   >([]);
-  const [currentWishlist, setCurrentWishlist] = useState<string[]>([]);
+  const [currentWishlist, setCurrentWishlist] = useState<string[]>(wishlistArr);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setWishlist(currentWishlist));
+    localStorage.setItem("wishes", JSON.stringify(currentWishlist));
   }, [currentWishlist]);
 
   useEffect(() => {
     switch (currentCollection) {
-      case t("All collections"):
+      case "All collections":
         setCurrentCollectionArr(
           winterBeds.concat(autumnBeds).concat(summerBeds)
         );
         break;
-      case t("Winter collection"):
+      case "Winter collection":
         setCurrentCollectionArr(winterBeds);
         break;
-      case t("Autumn Collection"):
+      case "Autumn Collection":
         setCurrentCollectionArr(autumnBeds);
         break;
-      case t("Summer Collection"):
+      case "Summer Collection":
         setCurrentCollectionArr(summerBeds);
         break;
       default:
@@ -47,42 +47,42 @@ const Collection = () => {
   }, [currentCollection]);
 
   const winterBeds = [
-    { src: "./bed photo 3.jpg", name: t("Squares") },
-    { src: "./bed photo 4.jpg", name: t("Ikat") },
-    { src: "./bed photo 5.jpg", name: t("Circle") },
-    { src: "./bed photo 6.jpg", name: t("Geometry blue") },
-    { src: "./bed photo 7.jpg", name: t("Tropical leaves") },
-    { src: "./bed photo 8.jpg", name: t("Bambi") },
-    { src: "./bed photo 9.jpg", name: t("Byzantium") },
-    { src: "./bed photo 10.jpg", name: t("Evening garden") },
-    { src: "./bed photo 11.jpg", name: t("Pat marquis") },
-    { src: "./bed photo 12.jpg", name: t("Lavender roses") },
+    { src: "./bed photo 3.jpg", name: "Squares" },
+    { src: "./bed photo 4.jpg", name: "Ikat" },
+    { src: "./bed photo 5.jpg", name: "Circle" },
+    { src: "./bed photo 6.jpg", name: "Geometry blue" },
+    { src: "./bed photo 7.jpg", name: "Tropical leaves" },
+    { src: "./bed photo 8.jpg", name: "Bambi" },
+    { src: "./bed photo 9.jpg", name: "Byzantium" },
+    { src: "./bed photo 10.jpg", name: "Evening garden" },
+    { src: "./bed photo 11.jpg", name: "Pat marquis" },
+    { src: "./bed photo 12.jpg", name: "Lavender roses" },
   ];
 
   const autumnBeds = [
-    { src: "./bed photo 13.jpg", name: t("Safari") },
-    { src: "./bed photo 14.jpg", name: t("Multicolor amethyst") },
-    { src: "./bed photo 15.jpg", name: t("Shivali decoration") },
-    { src: "./bed photo 16.jpg", name: t("Emerald (AB)") },
-    { src: "./bed photo 17.jpg", name: t("Malachite box") },
-    { src: "./bed photo 18.jpg", name: t("Scents of spring") },
-    { src: "./bed photo 19.jpg", name: t("Falling autumn leaves (AB)") },
-    { src: "./bed photo 20.jpg", name: t("Blue breeze") },
-    { src: "./bed photo 21.jpg", name: t("Blue water") },
-    { src: "./bed photo 22.jpg", name: t("Plaid") },
+    { src: "./bed photo 13.jpg", name: "Safari" },
+    { src: "./bed photo 14.jpg", name: "Multicolor amethyst" },
+    { src: "./bed photo 15.jpg", name: "Shivali decoration" },
+    { src: "./bed photo 16.jpg", name: "Emerald (AB)" },
+    { src: "./bed photo 17.jpg", name: "Malachite box" },
+    { src: "./bed photo 18.jpg", name: "Scents of spring" },
+    { src: "./bed photo 19.jpg", name: "Falling autumn leaves (AB)" },
+    { src: "./bed photo 20.jpg", name: "Blue breeze" },
+    { src: "./bed photo 21.jpg", name: "Blue water" },
+    { src: "./bed photo 22.jpg", name: "Plaid" },
   ];
 
   const summerBeds = [
-    { src: "./bed photo 23.jpg", name: t("Vintage style") },
-    { src: "./bed photo 24.jpg", name: t("Rocking dandelion") },
-    { src: "./bed photo 25.jpg", name: t("French riviera") },
-    { src: "./bed photo 26.jpg", name: t("Dolly the sheep") },
-    { src: "./bed photo 27.jpg", name: t("Alpine plants") },
-    { src: "./bed photo 28.jpg", name: t("Inspirational") },
-    { src: "./bed photo 29.jpg", name: t("Green lotus") },
-    { src: "./bed photo 30.jpg", name: t("Mountain corn") },
-    { src: "./bed photo 31.jpg", name: t("Sakura branch") },
-    { src: "./bed photo 32.jpg", name: t("Olive branch") },
+    { src: "./bed photo 23.jpg", name: "Vintage style" },
+    { src: "./bed photo 24.jpg", name: "Rocking dandelion" },
+    { src: "./bed photo 25.jpg", name: "French riviera" },
+    { src: "./bed photo 26.jpg", name: "Dolly the sheep" },
+    { src: "./bed photo 27.jpg", name: "Alpine plants" },
+    { src: "./bed photo 28.jpg", name: "Inspirational" },
+    { src: "./bed photo 29.jpg", name: "Green lotus" },
+    { src: "./bed photo 30.jpg", name: "Mountain corn" },
+    { src: "./bed photo 31.jpg", name: "Sakura branch" },
+    { src: "./bed photo 32.jpg", name: "Olive branch" },
   ];
 
   return (
@@ -102,23 +102,23 @@ const Collection = () => {
                         name: string;
                       }[] = [];
                       switch (currentCollection) {
-                        case t("All collections"):
+                        case "All collections":
                           searchedCollection = winterBeds
                             .concat(autumnBeds)
                             .concat(summerBeds)
                             .filter((bed) => bed.name.includes(value));
                           break;
-                        case t("Winter collection"):
+                        case "Winter collection":
                           searchedCollection = winterBeds.filter((bed) =>
                             bed.name.includes(value)
                           );
                           break;
-                        case t("Autumn Collection"):
+                        case "Autumn Collection":
                           searchedCollection = autumnBeds.filter((bed) =>
                             bed.name.includes(value)
                           );
                           break;
-                        case t("Summer Collection"):
+                        case "Summer Collection":
                           searchedCollection = summerBeds.filter((bed) =>
                             bed.name.includes(value)
                           );
@@ -130,18 +130,18 @@ const Collection = () => {
                       setCurrentCollectionArr(searchedCollection);
                     } else {
                       switch (currentCollection) {
-                        case t("All collections"):
+                        case "All collections":
                           setCurrentCollectionArr(
                             winterBeds.concat(autumnBeds).concat(summerBeds)
                           );
                           break;
-                        case t("Winter collection"):
+                        case "Winter collection":
                           setCurrentCollectionArr(winterBeds);
                           break;
-                        case t("Autumn Collection"):
+                        case "Autumn Collection":
                           setCurrentCollectionArr(autumnBeds);
                           break;
-                        case t("Summer Collection"):
+                        case "Summer Collection":
                           setCurrentCollectionArr(summerBeds);
                           break;
                         default:
@@ -162,16 +162,16 @@ const Collection = () => {
                   className={clsx(
                     "px-2 py-2 text-xs text-white bg-black rounded-xl w-fit flex items-center",
                     {
-                      "bg-red-600": currentCollection === t("All collections"),
+                      "bg-red-600": currentCollection === "All collections",
                     },
                     {
-                      "bg-black": !(currentCollection === t("All collections")),
+                      "bg-black": !(currentCollection === "All collections"),
                     }
                   )}
                 >
                   <button
                     onClick={() => {
-                      setCurrentCollection(t("All collections"));
+                      setCurrentCollection("All collections");
                     }}
                     className="w-fit whitespace-nowrap"
                   >
@@ -182,20 +182,17 @@ const Collection = () => {
                   className={clsx(
                     "px-2 py-2 text-xs text-white bg-black rounded-xl w-fit flex items-center",
                     {
-                      "bg-red-600":
-                        currentCollection === t("Winter collection"),
+                      "bg-red-600": currentCollection === "Winter collection",
                     },
                     {
-                      "bg-black": !(
-                        currentCollection === t("Winter collection")
-                      ),
+                      "bg-black": !(currentCollection === "Winter collection"),
                     }
                   )}
                 >
                   <button
                     className="whitespace-nowrap"
                     onClick={() => {
-                      setCurrentCollection(t("Winter collection"));
+                      setCurrentCollection("Winter collection");
                     }}
                   >
                     {t("Winter collection")}
@@ -205,20 +202,17 @@ const Collection = () => {
                   className={clsx(
                     "px-2 py-2 text-xs text-white bg-black rounded-xl w-fit flex items-center",
                     {
-                      "bg-red-600":
-                        currentCollection === t("Autumn Collection"),
+                      "bg-red-600": currentCollection === "Autumn Collection",
                     },
                     {
-                      "bg-black": !(
-                        currentCollection === t("Autumn Collection")
-                      ),
+                      "bg-black": !(currentCollection === "Autumn Collection"),
                     }
                   )}
                 >
                   <button
                     className="whitespace-nowrap"
                     onClick={() => {
-                      setCurrentCollection(t("Autumn Collection"));
+                      setCurrentCollection("Autumn Collection");
                     }}
                   >
                     {t("Autumn Collection")}
@@ -228,20 +222,17 @@ const Collection = () => {
                   className={clsx(
                     "px-2 py-2 text-xs text-white bg-black rounded-xl w-fit flex items-center",
                     {
-                      "bg-red-600":
-                        currentCollection === t("Summer Collection"),
+                      "bg-red-600": currentCollection === "Summer Collection",
                     },
                     {
-                      "bg-black": !(
-                        currentCollection === t("Summer Collection")
-                      ),
+                      "bg-black": !(currentCollection === "Summer Collection"),
                     }
                   )}
                 >
                   <button
                     className="whitespace-nowrap"
                     onClick={() => {
-                      setCurrentCollection(t("Summer Collection"));
+                      setCurrentCollection("Summer Collection");
                     }}
                   >
                     {t("Summer Collection")}
@@ -260,23 +251,23 @@ const Collection = () => {
                         name: string;
                       }[] = [];
                       switch (currentCollection) {
-                        case t("All collections"):
+                        case "All collections":
                           searchedCollection = winterBeds
                             .concat(autumnBeds)
                             .concat(summerBeds)
                             .filter((bed) => bed.name.includes(value));
                           break;
-                        case t("Winter collection"):
+                        case "Winter collection":
                           searchedCollection = winterBeds.filter((bed) =>
                             bed.name.includes(value)
                           );
                           break;
-                        case t("Autumn Collection"):
+                        case "Autumn Collection":
                           searchedCollection = autumnBeds.filter((bed) =>
                             bed.name.includes(value)
                           );
                           break;
-                        case t("Summer Collection"):
+                        case "Summer Collection":
                           searchedCollection = summerBeds.filter((bed) =>
                             bed.name.includes(value)
                           );
@@ -288,18 +279,18 @@ const Collection = () => {
                       setCurrentCollectionArr(searchedCollection);
                     } else {
                       switch (currentCollection) {
-                        case t("All collections"):
+                        case "All collections":
                           setCurrentCollectionArr(
                             winterBeds.concat(autumnBeds).concat(summerBeds)
                           );
                           break;
-                        case t("Winter collection"):
+                        case "Winter collection":
                           setCurrentCollectionArr(winterBeds);
                           break;
-                        case t("Autumn Collection"):
+                        case "Autumn Collection":
                           setCurrentCollectionArr(autumnBeds);
                           break;
-                        case t("Summer Collection"):
+                        case "Summer Collection":
                           setCurrentCollectionArr(summerBeds);
                           break;
                         default:
@@ -320,13 +311,12 @@ const Collection = () => {
                 <ul className="flex flex-col gap-5">
                   <li
                     className={clsx("cursor-pointer", {
-                      "text-[#a17f4a]":
-                        currentCollection === t("All collections"),
+                      "text-[#a17f4a]": currentCollection === "All collections",
                     })}
                   >
                     <button
                       onClick={() => {
-                        setCurrentCollection(t("All collections"));
+                        setCurrentCollection("All collections");
                       }}
                     >
                       {t("All collections")}
@@ -335,12 +325,12 @@ const Collection = () => {
                   <li
                     className={clsx("cursor-pointer", {
                       "text-[#a17f4a]":
-                        currentCollection === t("Winter collection"),
+                        currentCollection === "Winter collection",
                     })}
                   >
                     <button
                       onClick={() => {
-                        setCurrentCollection(t("Winter collection"));
+                        setCurrentCollection("Winter collection");
                       }}
                     >
                       {t("Winter collection")}
@@ -349,12 +339,12 @@ const Collection = () => {
                   <li
                     className={clsx("cursor-pointer", {
                       "text-[#a17f4a]":
-                        currentCollection === t("Autumn Collection"),
+                        currentCollection === "Autumn Collection",
                     })}
                   >
                     <button
                       onClick={() => {
-                        setCurrentCollection(t("Autumn Collection"));
+                        setCurrentCollection("Autumn Collection");
                       }}
                     >
                       {t("Autumn Collection")}
@@ -363,12 +353,12 @@ const Collection = () => {
                   <li
                     className={clsx("cursor-pointer", {
                       "text-[#a17f4a]":
-                        currentCollection === t("Summer Collection"),
+                        currentCollection === "Summer Collection",
                     })}
                   >
                     <button
                       onClick={() => {
-                        setCurrentCollection(t("Summer Collection"));
+                        setCurrentCollection("Summer Collection");
                       }}
                     >
                       {t("Summer Collection")}
@@ -389,7 +379,7 @@ const Collection = () => {
                       alt={bed.name}
                       className="rounded-3xl hover:scale-105 duration-200 ease-linear"
                     />
-                    <p className="text-xs xs:text-base">{bed.name}</p>
+                    <p className="text-xs xs:text-base">{t(bed.name)}</p>
                     <button
                       onClick={() => {
                         if (currentWishlist.some((itm) => itm === bed.name)) {

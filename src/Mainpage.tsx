@@ -19,42 +19,42 @@ const Mainpage = () => {
   }, [currentWishlist]);
 
   const winterBeds = [
-    { src: "./bed photo 3.jpg", name: t("Squares") },
-    { src: "./bed photo 4.jpg", name: t("Ikat") },
-    { src: "./bed photo 5.jpg", name: t("Circle") },
-    { src: "./bed photo 6.jpg", name: t("Geometry blue") },
-    { src: "./bed photo 7.jpg", name: t("Tropical leaves") },
-    { src: "./bed photo 8.jpg", name: t("Bambi") },
-    { src: "./bed photo 9.jpg", name: t("Byzantium") },
-    { src: "./bed photo 10.jpg", name: t("Evening garden") },
-    { src: "./bed photo 11.jpg", name: t("Pat marquis") },
-    { src: "./bed photo 12.jpg", name: t("Lavender roses") },
+    { src: "./bed photo 3.jpg", name: "Squares" },
+    { src: "./bed photo 4.jpg", name: "Ikat" },
+    { src: "./bed photo 5.jpg", name: "Circle" },
+    { src: "./bed photo 6.jpg", name: "Geometry blue" },
+    { src: "./bed photo 7.jpg", name: "Tropical leaves" },
+    { src: "./bed photo 8.jpg", name: "Bambi" },
+    { src: "./bed photo 9.jpg", name: "Byzantium" },
+    { src: "./bed photo 10.jpg", name: "Evening garden" },
+    { src: "./bed photo 11.jpg", name: "Pat marquis" },
+    { src: "./bed photo 12.jpg", name: "Lavender roses" },
   ];
 
   const autumnBeds = [
-    { src: "./bed photo 13.jpg", name: t("Safari") },
-    { src: "./bed photo 14.jpg", name: t("Multicolor amethyst") },
-    { src: "./bed photo 15.jpg", name: t("Shivali decoration") },
-    { src: "./bed photo 16.jpg", name: t("Emerald (AB)") },
-    { src: "./bed photo 17.jpg", name: t("Malachite box") },
-    { src: "./bed photo 18.jpg", name: t("Scents of spring") },
-    { src: "./bed photo 19.jpg", name: t("Falling autumn leaves (AB)") },
-    { src: "./bed photo 20.jpg", name: t("Blue breeze") },
-    { src: "./bed photo 21.jpg", name: t("Blue water") },
-    { src: "./bed photo 22.jpg", name: t("Plaid") },
+    { src: "./bed photo 13.jpg", name: "Safari" },
+    { src: "./bed photo 14.jpg", name: "Multicolor amethyst" },
+    { src: "./bed photo 15.jpg", name: "Shivali decoration" },
+    { src: "./bed photo 16.jpg", name: "Emerald (AB)" },
+    { src: "./bed photo 17.jpg", name: "Malachite box" },
+    { src: "./bed photo 18.jpg", name: "Scents of spring" },
+    { src: "./bed photo 19.jpg", name: "Falling autumn leaves (AB)" },
+    { src: "./bed photo 20.jpg", name: "Blue breeze" },
+    { src: "./bed photo 21.jpg", name: "Blue water" },
+    { src: "./bed photo 22.jpg", name: "Plaid" },
   ];
 
   const summerBeds = [
-    { src: "./bed photo 23.jpg", name: t("Vintage style") },
-    { src: "./bed photo 24.jpg", name: t("Rocking dandelion") },
-    { src: "./bed photo 25.jpg", name: t("French riviera") },
-    { src: "./bed photo 26.jpg", name: t("Dolly the sheep") },
-    { src: "./bed photo 27.jpg", name: t("Alpine plants") },
-    { src: "./bed photo 28.jpg", name: t("Inspirational") },
-    { src: "./bed photo 29.jpg", name: t("Green lotus") },
-    { src: "./bed photo 30.jpg", name: t("Mountain corn") },
-    { src: "./bed photo 31.jpg", name: t("Sakura branch") },
-    { src: "./bed photo 32.jpg", name: t("Olive branch") },
+    { src: "./bed photo 23.jpg", name: "Vintage style" },
+    { src: "./bed photo 24.jpg", name: "Rocking dandelion" },
+    { src: "./bed photo 25.jpg", name: "French riviera" },
+    { src: "./bed photo 26.jpg", name: "Dolly the sheep" },
+    { src: "./bed photo 27.jpg", name: "Alpine plants" },
+    { src: "./bed photo 28.jpg", name: "Inspirational" },
+    { src: "./bed photo 29.jpg", name: "Green lotus" },
+    { src: "./bed photo 30.jpg", name: "Mountain corn" },
+    { src: "./bed photo 31.jpg", name: "Sakura branch" },
+    { src: "./bed photo 32.jpg", name: "Olive branch" },
   ];
 
   const news = [
@@ -215,7 +215,7 @@ const Mainpage = () => {
                       alt={bed.name}
                       className="rounded-3xl hover:scale-105 duration-200 ease-linear"
                     />
-                    <p className="text-xs xs:text-base">{bed.name}</p>
+                    <p className="text-xs xs:text-base">{t(bed.name)}</p>
                     <button
                       onClick={() => {
                         if (currentWishlist.some((itm) => itm === bed.name)) {
@@ -264,7 +264,7 @@ const Mainpage = () => {
                       alt={bed.name}
                       className="rounded-3xl hover:scale-105 duration-200 ease-linear"
                     />
-                    <p className="text-xs xs:text-base">{bed.name}</p>
+                    <p className="text-xs xs:text-base">{t(bed.name)}</p>
                     <button
                       onClick={() => {
                         if (currentWishlist.some((itm) => itm === bed.name)) {
@@ -313,7 +313,7 @@ const Mainpage = () => {
                       alt={bed.name}
                       className="rounded-3xl hover:scale-105 duration-200 ease-linear"
                     />
-                    <p className="text-xs xs:text-base">{bed.name}</p>
+                    <p className="text-xs xs:text-base">{t(bed.name)}</p>
                     <button
                       onClick={() => {
                         if (currentWishlist.some((itm) => itm === bed.name)) {
@@ -353,9 +353,9 @@ const Mainpage = () => {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-10 mt-20">
-              {news.map((itm) => {
+              {news.map((itm, i) => {
                 return (
-                  <div className="flex flex-col gap-3 w-full sm:w-1/3">
+                  <div key={i} className="flex flex-col gap-3 w-full sm:w-1/3">
                     <img
                       src={itm.img}
                       alt="news photo"

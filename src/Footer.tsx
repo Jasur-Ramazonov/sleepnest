@@ -32,7 +32,7 @@ const Footer = () => {
                 <Link to="/about">{t("About Us")}</Link>
               </li>
               <li className="text-[#6c6c6c] font-normal text-sm xs:text-base hover:text-[#fc0000] duration-75 ease-linear transition-colors">
-                <Link to="/contact">{t("Contacts")}</Link>
+                <Link to="/contacts">{t("Contacts")}</Link>
               </li>
             </ul>
           </div>
