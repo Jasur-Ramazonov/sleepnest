@@ -10,42 +10,6 @@ import { setWishlist } from "./utils/slice";
 import TelegramButton from "./TelegramButton";
 
 const Collection = () => {
-  const { t } = useTranslation();
-  const wishlist = localStorage.getItem("wishes") ?? "[]";
-  const wishlistArr: string[] = JSON.parse(wishlist);
-  const [currentCollection, setCurrentCollection] = useState("All collections");
-  const [currentCollectionArr, setCurrentCollectionArr] = useState<
-    { src: string; name: string }[]
-  >([]);
-  const [currentWishlist, setCurrentWishlist] = useState<string[]>(wishlistArr);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setWishlist(currentWishlist));
-    localStorage.setItem("wishes", JSON.stringify(currentWishlist));
-  }, [currentWishlist]);
-
-  useEffect(() => {
-    switch (currentCollection) {
-      case "All collections":
-        setCurrentCollectionArr(
-          winterBeds.concat(autumnBeds).concat(summerBeds)
-        );
-        break;
-      case "Winter collection":
-        setCurrentCollectionArr(winterBeds);
-        break;
-      case "Autumn Collection":
-        setCurrentCollectionArr(autumnBeds);
-        break;
-      case "Summer Collection":
-        setCurrentCollectionArr(summerBeds);
-        break;
-      default:
-        break;
-    }
-  }, [currentCollection]);
-
   const winterBeds = [
     { src: "./bed photo 3.jpg", name: "Squares" },
     { src: "./bed photo 4.jpg", name: "Ikat" },
@@ -84,6 +48,41 @@ const Collection = () => {
     { src: "./bed photo 31.jpg", name: "Sakura branch" },
     { src: "./bed photo 32.jpg", name: "Olive branch" },
   ];
+  const { t } = useTranslation();
+  const wishlist = localStorage.getItem("wishes") ?? "[]";
+  const wishlistArr: string[] = JSON.parse(wishlist);
+  const [currentCollection, setCurrentCollection] = useState("All collections");
+  const [currentCollectionArr, setCurrentCollectionArr] = useState<
+    { src: string; name: string }[]
+  >([]);
+  const [currentWishlist, setCurrentWishlist] = useState<string[]>(wishlistArr);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setWishlist(currentWishlist));
+    localStorage.setItem("wishes", JSON.stringify(currentWishlist));
+  }, [currentWishlist]);
+
+  useEffect(() => {
+    switch (currentCollection) {
+      case "All collections":
+        setCurrentCollectionArr(
+          winterBeds.concat(autumnBeds).concat(summerBeds)
+        );
+        break;
+      case "Winter collection":
+        setCurrentCollectionArr(winterBeds);
+        break;
+      case "Autumn Collection":
+        setCurrentCollectionArr(autumnBeds);
+        break;
+      case "Summer Collection":
+        setCurrentCollectionArr(summerBeds);
+        break;
+      default:
+        break;
+    }
+  }, [currentCollection]);
 
   return (
     <div>

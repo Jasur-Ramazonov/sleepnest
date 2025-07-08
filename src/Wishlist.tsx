@@ -66,14 +66,14 @@ const Wishlist = () => {
     const wishes: { src: string; name: string }[] = wishlistNames.map((itm) => {
       return allBeds.find((bed) => bed.name === itm)!;
     });
-    setCurrentWishlist(wishes);
+    if (wishes) setCurrentWishlist(wishes);
   }, []);
 
   useEffect(() => {
     const wishes: { src: string; name: string }[] = wishlistNames.map((itm) => {
       return allBeds.find((bed) => bed.name === itm)!;
     });
-    setCurrentWishlist(wishes);
+    if (wishes) setCurrentWishlist(wishes);
     dispatch(setWishlist(wishlistNames));
     localStorage.setItem("wishes", JSON.stringify(wishlistNames));
   }, [wishlistNames]);
