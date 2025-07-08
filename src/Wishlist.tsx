@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { setWishlist } from "./utils/slice";
 const Wishlist = () => {
   const { t } = useTranslation();
-  const wishlist: string[] = JSON.parse(localStorage.getItem("wishes")!);
+  const wishlist: string[] = JSON.parse(localStorage.getItem("wishes") ?? "[]");
   const dispatch = useDispatch();
 
   const winterBeds = [

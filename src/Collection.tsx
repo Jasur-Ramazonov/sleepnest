@@ -11,7 +11,7 @@ import TelegramButton from "./TelegramButton";
 
 const Collection = () => {
   const { t } = useTranslation();
-  const wishlist = localStorage.getItem("wishes")!;
+  const wishlist = localStorage.getItem("wishes") ?? "[]";
   const wishlistArr: string[] = JSON.parse(wishlist);
   const [currentCollection, setCurrentCollection] = useState("All collections");
   const [currentCollectionArr, setCurrentCollectionArr] = useState<
