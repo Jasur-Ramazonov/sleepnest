@@ -6,7 +6,7 @@ const TelegramButton = () => {
     <div className="telegram">
       <a
         className="telegram__icon"
-        href="https://t.me/Shamsiddin_69_75"
+        href="https://t.me/jasur_ramazonov"
         aria-label="telegram__link"
         target="_blank"
         rel="noopener noreferrer"
