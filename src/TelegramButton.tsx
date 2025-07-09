@@ -1,5 +1,5 @@
 import { RiTelegram2Fill } from "react-icons/ri";
-import "./Telegrambutton.css";
+import "./telegrambutton.css";
 
 const TelegramButton = () => {
   return (
