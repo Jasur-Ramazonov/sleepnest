@@ -105,21 +105,25 @@ const Collection = () => {
                           searchedCollection = winterBeds
                             .concat(autumnBeds)
                             .concat(summerBeds)
-                            .filter((bed) => bed.name.includes(value));
+                            .filter((bed) =>
+                              bed.name
+                                .toUpperCase()
+                                .includes(value.toUpperCase())
+                            );
                           break;
                         case "Winter collection":
                           searchedCollection = winterBeds.filter((bed) =>
-                            bed.name.includes(value)
+                            bed.name.toUpperCase().includes(value.toUpperCase())
                           );
                           break;
                         case "Autumn Collection":
                           searchedCollection = autumnBeds.filter((bed) =>
-                            bed.name.includes(value)
+                            bed.name.toUpperCase().includes(value.toUpperCase())
                           );
                           break;
                         case "Summer Collection":
                           searchedCollection = summerBeds.filter((bed) =>
-                            bed.name.includes(value)
+                            bed.name.toUpperCase().includes(value.toUpperCase())
                           );
                           break;
                         default:
@@ -254,21 +258,25 @@ const Collection = () => {
                           searchedCollection = winterBeds
                             .concat(autumnBeds)
                             .concat(summerBeds)
-                            .filter((bed) => bed.name.includes(value));
+                            .filter((bed) =>
+                              bed.name
+                                .toUpperCase()
+                                .includes(value.toUpperCase())
+                            );
                           break;
                         case "Winter collection":
                           searchedCollection = winterBeds.filter((bed) =>
-                            bed.name.includes(value)
+                            bed.name.toUpperCase().includes(value.toUpperCase())
                           );
                           break;
                         case "Autumn Collection":
                           searchedCollection = autumnBeds.filter((bed) =>
-                            bed.name.includes(value)
+                            bed.name.toUpperCase().includes(value.toUpperCase())
                           );
                           break;
                         case "Summer Collection":
                           searchedCollection = summerBeds.filter((bed) =>
-                            bed.name.includes(value)
+                            bed.name.toUpperCase().includes(value.toUpperCase())
                           );
                           break;
                         default:

@@ -90,7 +90,7 @@ const Header = () => {
               <Link to="/wishlist">
                 <FaHeart className="text-red-600 text-lg xd:text-xl lg:text-2xl" />
               </Link>
-              <div className="w-[22px] h-[22px] rounded-full absolute bg-black text-white flex items-center justify-center -top-2 -right-2 ">
+              <div className="w-[15px] lg:w-[22px] h-[15px] lg:h-[22px]  text-xs lg:text-base rounded-full absolute bg-black text-white flex items-center justify-center -top-2 -right-2 ">
                 {wishlist.length}
               </div>
             </div>
@@ -208,10 +208,16 @@ const Header = () => {
             </button>
           </li>
           <li className="relative">
-            <Link to="/wishlist">
-              <FaHeart className="text-red-600 text-2xl cursor-pointer" />
-            </Link>
-            <div className="w-[22px] h-[22px] rounded-full absolute bg-black text-white flex items-center justify-center -top-2 -right-2">
+            <button
+              onClick={() => {
+                dispatch(setIsOpen(false));
+              }}
+            >
+              <Link to="/wishlist">
+                <FaHeart className="text-red-600 text-2xl cursor-pointer" />
+              </Link>
+            </button>
+            <div className="w-[15px] xm:w-[22px] h-15px xm:h-[22px] text-xs xm:text-base rounded-full absolute bg-black text-white flex items-center justify-center -top-2 -right-2">
               {wishlist.length}
             </div>
           </li>
