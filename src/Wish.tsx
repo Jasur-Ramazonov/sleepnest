@@ -205,6 +205,13 @@ const Wish = () => {
     dispatch(setIsSetWishes(!isSetWishes));
   }, [wishes]);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   function setItem(wish: string) {
     if (wishes.includes(wish)) {
       const reducedWishes = wishes.filter((itm) => itm !== wish);
@@ -306,31 +313,40 @@ const Wish = () => {
                   {t("Product Reviews")}
                 </p>
                 <div className="w-full flex flex-col gap-5">
-                  {/* buni map qilish kerak */}
-                  {reviews
-                    .filter((rev) => rev.bedName === currentBed?.name)
-                    .map((review, i) => {
-                      return (
-                        <div
-                          key={i}
-                          className="border border-red-600 rounded-md w-full px-2 py-3"
-                        >
-                          <div className="w-full flex justify-between">
-                            <p className="font-bold text-base">{review.name}</p>
-                            <p className="text-[9px]">{review.time}</p>
-                          </div>
-                          <div className="flex gap-5 items-center">
-                            <p className="font-bold text-[#7c7c7c]">Rating:</p>
-                            <p className="text-sm text-[#00f]">
-                              {review.rating}/5
+                  {reviews.filter(
+                    (rev) => rev.bedName === currentBed?.name
+                  )[0] ? (
+                    reviews
+                      .filter((rev) => rev.bedName === currentBed?.name)
+                      .map((review, i) => {
+                        return (
+                          <div
+                            key={i}
+                            className="border border-red-600 rounded-md w-full px-2 py-3"
+                          >
+                            <div className="w-full flex justify-between">
+                              <p className="font-bold text-base">
+                                {review.name}
+                              </p>
+                              <p className="text-[9px]">{review.time}</p>
+                            </div>
+                            <div className="flex gap-5 items-center">
+                              <p className="font-bold text-[#7c7c7c]">
+                                Rating:
+                              </p>
+                              <p className="text-sm text-[#00f]">
+                                {review.rating}/5
+                              </p>
+                            </div>
+                            <p className="text-[#5f02ff] text-sm">
+                              {review.message}
                             </p>
                           </div>
-                          <p className="text-[#5f02ff] text-sm">
-                            {review.message}
-                          </p>
-                        </div>
-                      );
-                    })}
+                        );
+                      })
+                  ) : (
+                    <p className="text-center">{t("No reviews yet.")}</p>
+                  )}
                 </div>
               </div>
               <div className="w-full md:w-1/2 flex flex-col gap-10 order-1 md:order-2">
@@ -455,7 +471,7 @@ const Wish = () => {
             </div>
           </div>
           <div className="w-full mt-40 mb-20 flex flex-col gap-10">
-            <p className="text-center font-bold text-4xl">
+            <p className="text-center font-bold text-lg sm:text-4xl">
               {t("Similar Products")}
             </p>
             <div className="grid grid-cols-2 xm:grid-cols-3 xd:grid-cols-4 lg:grid-cols-5 gap-5 xs:gap-10 mt-10">
@@ -465,7 +481,7 @@ const Wish = () => {
                     key={bed.name}
                     className="hover:text-red-500 cursor-pointer duration-75 ease-linear flex flex-col gap-2 relative"
                   >
-                    <Link to={`product/${bed.name}`}>
+                    <Link to={`/product/${bed.name}`}>
                       <img
                         src={bed.src}
                         alt={bed.name}
