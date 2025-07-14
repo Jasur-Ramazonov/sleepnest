@@ -5,6 +5,7 @@ import Collection from "./Collection";
 import About from "./About";
 import Contact from "./Contact";
 import Wishlist from "./Wishlist";
+import Wish from "./Wish";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/contacts" element={<Contact />} />
       <Route path="/wishlist" element={<Wishlist />} />
+      <Route path="/product/:productname" element={<Wish />} />
     </Routes>
   );
 }

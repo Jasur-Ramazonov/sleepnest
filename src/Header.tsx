@@ -16,19 +16,29 @@ const Header = () => {
   const [currentLanguage, setCurrentLanguage] = useState(language);
   const isOpen = useSelector((state: RootState) => state.myReducer.isOpen);
   const { t } = useTranslation();
-  const wishlist = useSelector((state: RootState) => state.myReducer.wishlist);
+  const [wishlist, setWishlist] = useState<string[]>(
+    JSON.parse(localStorage.getItem("wishes") ?? "[]")
+  );
   const dispatch = useDispatch();
+  const isSetWishes = useSelector(
+    (state: RootState) => state.myReducer.isSetWishes
+  );
 
   useEffect(() => {
     i18n.changeLanguage(currentLanguage);
   }, [currentLanguage]);
+
+  useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem("wishes") ?? "[]"));
+    setWishlist(JSON.parse(localStorage.getItem("wishes") ?? "[]"));
+  }, [isSetWishes]);
 
   return (
     <header className="font-unbounded fixed top-0 w-full z-[50] shadow-md bg-white">
       <div className="w-full flex justify-center items-center">
         <div className="w-full xl:w-[1538px] px-5 xd:px-10 py-1 xd:py-3 flex items-center justify-between">
           <Link to="/" className="block w-[150px] xs:w-[170px]">
-            <img src="./logo sleepnest.png" alt="Logo sleepnest" />
+            <img src="/logo sleepnest.png" alt="Logo sleepnest" />
           </Link>
           <div className="flex gap-2 xd:gap-5 items-center">
             <ul className="hidden md:flex gap-5 xd:gap-10 items-center">

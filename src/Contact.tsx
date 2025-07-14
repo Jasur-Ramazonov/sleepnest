@@ -7,6 +7,7 @@ import "animate.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { useEffect } from "react";
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -16,6 +17,13 @@ const Contact = () => {
     phone: string;
     message?: string;
   }>();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <div>

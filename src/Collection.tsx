@@ -5,9 +5,11 @@ import Header from "./Header";
 import { FaHeart, FaRegHeart, FaSearch } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
-import { useDispatch } from "react-redux";
-import { setWishlist } from "./utils/slice";
 import TelegramButton from "./TelegramButton";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsSetWishes } from "./utils/slice";
+import { RootState } from "./utils/store";
+import { Link } from "react-router-dom";
 
 const Collection = () => {
   const winterBeds = [
@@ -22,7 +24,6 @@ const Collection = () => {
     { src: "./bed photo 11.jpg", name: "Pat marquis" },
     { src: "./bed photo 12.jpg", name: "Lavender roses" },
   ];
-
   const autumnBeds = [
     { src: "./bed photo 13.jpg", name: "Safari" },
     { src: "./bed photo 14.jpg", name: "Multicolor amethyst" },
@@ -35,7 +36,6 @@ const Collection = () => {
     { src: "./bed photo 21.jpg", name: "Blue water" },
     { src: "./bed photo 22.jpg", name: "Plaid" },
   ];
-
   const summerBeds = [
     { src: "./bed photo 23.jpg", name: "Vintage style" },
     { src: "./bed photo 24.jpg", name: "Rocking dandelion" },
@@ -48,20 +48,30 @@ const Collection = () => {
     { src: "./bed photo 31.jpg", name: "Sakura branch" },
     { src: "./bed photo 32.jpg", name: "Olive branch" },
   ];
+
   const { t } = useTranslation();
-  const wishlist = localStorage.getItem("wishes") ?? "[]";
-  const wishlistArr: string[] = JSON.parse(wishlist);
+  const wishes: string[] = JSON.parse(localStorage.getItem("wishes") ?? "[]");
   const [currentCollection, setCurrentCollection] = useState("All collections");
   const [currentCollectionArr, setCurrentCollectionArr] = useState<
     { src: string; name: string }[]
   >([]);
-  const [currentWishlist, setCurrentWishlist] = useState<string[]>(wishlistArr);
+  const [currentWishlist, setCurrentWishlist] = useState<string[]>(wishes);
   const dispatch = useDispatch();
+  const isSetWishes = useSelector(
+    (state: RootState) => state.myReducer.isSetWishes
+  );
 
   useEffect(() => {
-    dispatch(setWishlist(currentWishlist));
     localStorage.setItem("wishes", JSON.stringify(currentWishlist));
+    dispatch(setIsSetWishes(!isSetWishes));
   }, [currentWishlist]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   useEffect(() => {
     switch (currentCollection) {
@@ -381,11 +391,13 @@ const Collection = () => {
                     key={bed.name}
                     className="hover:text-red-500 cursor-pointer duration-75 ease-linear flex flex-col gap-2 relative"
                   >
-                    <img
-                      src={bed.src}
-                      alt={bed.name}
-                      className="rounded-3xl hover:scale-105 duration-200 ease-linear"
-                    />
+                    <Link to={`/product/${bed.name}`}>
+                      <img
+                        src={bed.src}
+                        alt={bed.name}
+                        className="rounded-3xl hover:scale-105 duration-200 ease-linear"
+                      />
+                    </Link>
                     <p className="text-xs xs:text-base">{t(bed.name)}</p>
                     <button
                       onClick={() => {

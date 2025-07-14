@@ -5,18 +5,20 @@ import Header from "./Header";
 import TelegramButton from "./TelegramButton";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setWishlist } from "./utils/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsSetWishes } from "./utils/slice";
+import { RootState } from "./utils/store";
+import { Link } from "react-router-dom";
 
 const Mainpage = () => {
   const { t } = useTranslation();
-
-  const [currentWishlist, setCurrentWishlist] = useState<string[]>([]);
+  const [wishes, setWishes] = useState<string[]>(
+    JSON.parse(localStorage.getItem("wishes") ?? "[]")
+  );
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setWishlist(currentWishlist));
-  }, [currentWishlist]);
+  const isSetWishes = useSelector(
+    (state: RootState) => state.myReducer.isSetWishes
+  );
 
   const winterBeds = [
     { src: "./bed photo 3.jpg", name: "Squares" },
@@ -74,7 +76,26 @@ const Mainpage = () => {
       lgtext: t("News lg text 3"),
     },
   ];
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
+  useEffect(() => {
+    localStorage.setItem("wishes", JSON.stringify(wishes));
+    dispatch(setIsSetWishes(!isSetWishes));
+  }, [wishes]);
+
+  function setItem(wish: string) {
+    if (wishes.includes(wish)) {
+      const reducedWishes = wishes.filter((itm) => itm !== wish);
+      setWishes(reducedWishes);
+      return;
+    }
+    setWishes([...wishes, wish]);
+  }
   return (
     <main>
       <Header />
@@ -210,26 +231,21 @@ const Mainpage = () => {
                     key={bed.name}
                     className="hover:text-red-500 cursor-pointer duration-75 ease-linear flex flex-col gap-2 relative"
                   >
-                    <img
-                      src={bed.src}
-                      alt={bed.name}
-                      className="rounded-3xl hover:scale-105 duration-200 ease-linear"
-                    />
+                    <Link to={`product/${bed.name}`}>
+                      <img
+                        src={bed.src}
+                        alt={bed.name}
+                        className="rounded-3xl hover:scale-105 duration-200 ease-linear"
+                      />
+                    </Link>
                     <p className="text-xs xs:text-base">{t(bed.name)}</p>
                     <button
                       onClick={() => {
-                        if (currentWishlist.some((itm) => itm === bed.name)) {
-                          const myWishlist = currentWishlist.filter(
-                            (itm) => itm !== bed.name
-                          );
-                          setCurrentWishlist([...myWishlist]);
-                        } else {
-                          setCurrentWishlist([...currentWishlist, bed.name]);
-                        }
+                        setItem(bed.name);
                       }}
                       className="w-[25px] xs:w-[40px] h-[25px] xs:h-[40px] bg-[#d4d4d4] rounded-full absolute top-0 right-0 flex items-center justify-center"
                     >
-                      {currentWishlist.some((itm) => itm === bed.name) ? (
+                      {wishes.some((itm) => itm === bed.name) ? (
                         <FaHeart className="text-red-500 xs:text-2xl" />
                       ) : (
                         <FaRegHeart className="text-red-500 xs:text-2xl" />
@@ -259,26 +275,21 @@ const Mainpage = () => {
                     key={bed.name}
                     className="hover:text-red-500 cursor-pointer duration-75 ease-linear flex flex-col gap-2 relative"
                   >
-                    <img
-                      src={bed.src}
-                      alt={bed.name}
-                      className="rounded-3xl hover:scale-105 duration-200 ease-linear"
-                    />
+                    <Link to={`product/${bed.name}`}>
+                      <img
+                        src={bed.src}
+                        alt={bed.name}
+                        className="rounded-3xl hover:scale-105 duration-200 ease-linear"
+                      />
+                    </Link>
                     <p className="text-xs xs:text-base">{t(bed.name)}</p>
                     <button
                       onClick={() => {
-                        if (currentWishlist.some((itm) => itm === bed.name)) {
-                          const myWishlist = currentWishlist.filter(
-                            (itm) => itm !== bed.name
-                          );
-                          setCurrentWishlist([...myWishlist]);
-                        } else {
-                          setCurrentWishlist([...currentWishlist, bed.name]);
-                        }
+                        setItem(bed.name);
                       }}
                       className="w-[25px] xs:w-[40px] h-[25px] xs:h-[40px] bg-[#d4d4d4] rounded-full absolute top-0 right-0 flex items-center justify-center"
                     >
-                      {currentWishlist.some((itm) => itm === bed.name) ? (
+                      {wishes.some((itm) => itm === bed.name) ? (
                         <FaHeart className="text-red-500 xs:text-2xl" />
                       ) : (
                         <FaRegHeart className="text-red-500 xs:text-2xl" />
@@ -308,26 +319,21 @@ const Mainpage = () => {
                     key={bed.name}
                     className="hover:text-red-500 cursor-pointer duration-75 ease-linear flex flex-col gap-2 relative"
                   >
-                    <img
-                      src={bed.src}
-                      alt={bed.name}
-                      className="rounded-3xl hover:scale-105 duration-200 ease-linear"
-                    />
+                    <Link to={`product/${bed.name}`}>
+                      <img
+                        src={bed.src}
+                        alt={bed.name}
+                        className="rounded-3xl hover:scale-105 duration-200 ease-linear"
+                      />
+                    </Link>
                     <p className="text-xs xs:text-base">{t(bed.name)}</p>
                     <button
                       onClick={() => {
-                        if (currentWishlist.some((itm) => itm === bed.name)) {
-                          const myWishlist = currentWishlist.filter(
-                            (itm) => itm !== bed.name
-                          );
-                          setCurrentWishlist([...myWishlist]);
-                        } else {
-                          setCurrentWishlist([...currentWishlist, bed.name]);
-                        }
+                        setItem(bed.name);
                       }}
                       className="w-[25px] xs:w-[40px] h-[25px] xs:h-[40px] bg-[#d4d4d4] rounded-full absolute top-0 right-0 flex items-center justify-center"
                     >
-                      {currentWishlist.some((itm) => itm === bed.name) ? (
+                      {wishes.some((itm) => itm === bed.name) ? (
                         <FaHeart className="text-red-500 xs:text-2xl" />
                       ) : (
                         <FaRegHeart className="text-red-500 xs:text-2xl" />

@@ -3,9 +3,18 @@ import Footer from "./Footer";
 import Footer2 from "./Footer2";
 import Header from "./Header";
 import TelegramButton from "./TelegramButton";
+import { useEffect } from "react";
 
 const About = () => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <div>
       <Header />

@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="flex flex-col col-span-1 xs:col-span-2 gap-5 w-[80%]">
             <Link to="/">
               <img
-                src="./logo sleepnest.png"
+                src="/logo sleepnest.png"
                 alt="Logo sleeplest"
                 className="w-[300px]"
               />

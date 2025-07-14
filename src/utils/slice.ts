@@ -5,6 +5,7 @@ export const slice = createSlice({
   initialState: {
     isOpen: false,
     wishlist: [],
+    isSetWishes: true,
   },
   reducers: {
     setIsOpen: (state, action) => {
@@ -13,7 +14,10 @@ export const slice = createSlice({
     setWishlist: (state, action) => {
       state.wishlist = action.payload;
     },
+    setIsSetWishes: (state, action) => {
+      state.isSetWishes = action.payload;
+    },
   },
 });
 
-export const { setIsOpen, setWishlist } = slice.actions;
+export const { setIsOpen, setWishlist, setIsSetWishes } = slice.actions;
