@@ -12,7 +12,7 @@ import { setIsOpen } from "./utils/slice";
 
 const Header = () => {
   const location = useLocation();
-  const language = localStorage.getItem("i18nextLng") || Language.ENG;
+  const language = localStorage.getItem("i18nextLng") || "eng";
   const [currentLanguage, setCurrentLanguage] = useState(language);
   const isOpen = useSelector((state: RootState) => state.myReducer.isOpen);
   const { t } = useTranslation();
