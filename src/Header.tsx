@@ -38,7 +38,10 @@ const Header = () => {
       <div className="w-full flex justify-center items-center">
         <div className="w-full xl:w-[1538px] px-5 xd:px-10 py-1 xd:py-3 flex items-center justify-between">
           <Link to="/" className="block w-[150px] xs:w-[170px]">
-            <img src="/logo sleepnest.png" alt="Logo sleepnest" />
+            <img
+              src="https://consent.trustarc.com/v2/asset/20:43:42.231whs21m_Dreamhaven_logo_CCM.png"
+              alt="Logo sleepnest"
+            />
           </Link>
           <div className="flex gap-2 xd:gap-5 items-center">
             <ul className="hidden md:flex gap-5 xd:gap-10 items-center">
